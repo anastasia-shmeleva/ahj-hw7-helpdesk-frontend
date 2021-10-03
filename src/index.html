@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+<div id='container'>
+  <div class='header'>
+      <button class='btn__add'>Добавить тикет</button>
+  </div>
+  <table class='table'></table>
+
+</div>
+
+<div class='popup'>
+  <div class='popup__main'>
+    <h3 class='popup__title'>Добавить тикет</h3>
+      <div class='title__group'>
+          <span>Краткое описание</span>
+          <input name='title__input' class='title__input' type="string" required>
+      </div>
+      <div class='description__group'>
+          <span>Подробное описание</span>
+          <textarea name='description__input' class='description__input'></textarea>
+      </div>
+  </div>
+  <div class='popup__footer'>
+      <button class='btn__popup btn__cancel'>Отмена</button> 
+      <button class='btn__popup btn__save'>Ok</button>
+  </div>
+</div>
+
+</body>
+
+</html>
