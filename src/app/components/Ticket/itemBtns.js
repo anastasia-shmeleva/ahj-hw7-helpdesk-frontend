@@ -1,20 +1,31 @@
+/* eslint-disable no-param-reassign */
 const itemBtns = () => {
   const toUpdate = (e) => {
     const popup = document.querySelector('.popup');
-    const title = e.target.closest('.table__group').querySelectorAll('.table__item')[0].innerText;
+    const title = e.target.closest('.table__group').querySelector('.table__item').innerText;
 
-    const obj = Object.values(localStorage).find((item) => JSON.parse(item).title === title);
-
-    popup.querySelector('.title__input').value = JSON.parse(obj).title;
-    popup.querySelector('.description__input').value = JSON.parse(obj).description;
+    let el;
+    window.table.ticketController.tickets.then((tickets) => {
+      el = tickets.find((one) => one.name === title);
+      window.table.ticketController.ticketById(el.id);
+      window.table.ticketController.target.then((target) => {
+        popup.querySelector('.title__input').value = target.name;
+        popup.querySelector('.description__input').value = target.description;
+        target = undefined;
+      });
+    });
 
     popup.style.display = 'block';
   };
 
   const toDelete = (e) => {
+    const title = e.target.closest('.table__group').querySelector('.table__item').innerText;
     e.target.closest('.table__group').remove();
-    const id = 1;
-    window.table.ticketController.deleteTicket(id);
+
+    window.table.ticketController.tickets.then((tickets) => {
+      const el = tickets.find((one) => one.name === title);
+      window.table.ticketController.deleteTicket(el.id);
+    });
   };
 
   // Update

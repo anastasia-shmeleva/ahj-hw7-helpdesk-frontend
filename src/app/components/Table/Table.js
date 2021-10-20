@@ -3,6 +3,7 @@
 import engine from '../../lib/engine/engine';
 import template from '../Ticket/Ticket.template';
 import itemBtns from '../Ticket/itemBtns';
+import statusBtn from '../Ticket/statusBtn';
 
 export default class Table {
   constructor(table, addBtn, tooltip, ticketController) {
@@ -44,8 +45,11 @@ export default class Table {
     tickets.forEach((ticket) => {
       const good = engine(template([ticket.name, ticket.created]));
       this.table.querySelector('tbody').appendChild(good);
+      const btn = statusBtn();
       const btns = itemBtns();
+      this.table.querySelector('tbody').lastElementChild.appendChild(btn);
       this.table.querySelector('tbody').lastElementChild.appendChild(btns);
+      if (ticket.status === true) btn.querySelector('button').classList.add('btn__status_active');
     });
   }
 
@@ -72,6 +76,15 @@ export default class Table {
       this.table.appendChild(tbody);
     }
 
+    if (this.ticketController.target !== undefined) { // update
+      this.ticketController.target.then((target) => {
+        const { id } = target;
+        this.ticketController.updateTicket({ id, name, description });
+      });
+      this.onCancel();
+      return;
+    }
+    // create new
     const good = engine(template([name, created]));
     this.table.querySelector('tbody').appendChild(good);
 

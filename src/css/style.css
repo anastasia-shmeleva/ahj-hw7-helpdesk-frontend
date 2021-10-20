@@ -1,5 +1,5 @@
 #container {
-  width: 500px;
+  width: 600px;
 }
 
 .header {
@@ -49,7 +49,8 @@ th {
 }
 
 .btn__update,
-.btn__delete {
+.btn__delete,
+.btn__status {
   width: 15px;
   height: 15px;
   cursor: pointer;
@@ -58,6 +59,17 @@ th {
   align-self: center;
   background: #fff;
   padding: 0;
+}
+
+.btn__status {
+  border-radius: 50%;
+  border: 1px solid black;
+}
+
+.btn__status_active::after {
+  content: "✔";
+  position:static;
+  color:#000;
 }
 
 .btn__update::after {
