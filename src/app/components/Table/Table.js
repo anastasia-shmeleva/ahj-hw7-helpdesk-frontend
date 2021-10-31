@@ -51,6 +51,9 @@ export default class Table {
       this.table.querySelector('tbody').lastElementChild.appendChild(btns);
       if (ticket.status === true) btn.querySelector('button').classList.add('btn__status_active');
     });
+    // this.statusBtns = this.table.querySelectorAll('.btn__status');
+    // this.onStatusChange = this.onStatusChange.bind(this);
+    // this.statusBtns.forEach((btn) => btn.addEventListener('click', this.onStatusChange));
   }
 
   onAdd() {
@@ -88,7 +91,9 @@ export default class Table {
     const good = engine(template([name, created]));
     this.table.querySelector('tbody').appendChild(good);
 
+    const btn = statusBtn();
     const btns = itemBtns();
+    this.table.querySelector('tbody').lastElementChild.appendChild(btn);
     this.table.querySelector('tbody').lastElementChild.appendChild(btns);
 
     this.onCancel();
@@ -100,4 +105,8 @@ export default class Table {
     this.popup.querySelector('.title__input').value = '';
     this.popup.querySelector('.description__input').value = '';
   }
+
+  // onStatusChange(e) {
+  //   console.log(e.target);
+  // }
 }

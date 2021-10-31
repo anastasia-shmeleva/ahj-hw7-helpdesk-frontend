@@ -7,7 +7,17 @@ const statusBtn = () => {
 
     window.table.ticketController.tickets.then((tickets) => {
       const el = tickets.find((one) => one.name === title);
-      window.table.ticketController.changeStatus(el.id);
+
+      const { id } = el;
+      let status;
+      if (e.target.classList.contains('btn__status_active')) {
+        status = true;
+      } else status = false;
+
+      window.table.ticketController.changeStatus({ id, status });
+
+      // console.log({ id, status });
+      // console.log(tickets);
     });
   };
 

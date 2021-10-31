@@ -6,7 +6,7 @@ export default class TicketController {
 
       const response = await result.json();
 
-      return response.body.default.tickets;
+      return response;
     })();
   }
 
@@ -23,39 +23,42 @@ export default class TicketController {
 
       const response = await result.json();
 
-      return response.body;
+      return response;
     })();
   }
 
   updateTicket({ id, name, description }) {
-    fetch(`http://localhost:7070/?method=updateTicket&id=${id}&name=${name}&description=${description}`, {
-      method: 'PATCH',
-      body: JSON.stringify({ id, name, description }),
+    const formData = new FormData();
+    formData.append('id', id);
+    formData.append('name', name);
+    formData.append('description', description);
+
+    fetch('http://localhost:7070/?method=updateTicket', {
+      method: 'PUT',
+      body: new URLSearchParams(formData),
     });
   }
 
-  // createTicket({ name, description, created }) {
-  //   async function postData(url = 'http://localhost:7070/?method=createTicket', data = { name, description, created }) {
-  //     const response = await fetch(url, {
-  //       method: 'POST',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //       },
-  //       body: JSON.stringify(data),
-  //     });
-  //     console.log(response);
-  //     return response.json();
-  //   }
+  createTicket({ name, description, created }) {
+    const formData = new FormData();
+    formData.append('name', name);
+    formData.append('description', description);
+    formData.append('created', created);
 
-  //   postData('http://localhost:7070/?method=createTicket', { name, description, created })
-  //     .then((data) => {
-  //       console.log(data);
-  //     });
-  // }
+    fetch('http://localhost:7070/?method=createTicket', {
+      method: 'POST',
+      body: new URLSearchParams(formData),
+    });
+  }
 
-  changeStatus(id) {
-    fetch(`http://localhost:7070/?method=changeStatus&id=${id}`, {
+  changeStatus({ id, status }) {
+    const formData = new FormData();
+    formData.append('id', id);
+    formData.append('status', status);
+
+    fetch('http://localhost:7070/?method=changeStatus', {
       method: 'PATCH',
+      body: new URLSearchParams(formData),
     });
   }
 }
