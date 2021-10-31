@@ -1,0 +1,1 @@
+[![Build status](https://ci.appveyor.com/api/projects/status/ipuy1x480cjvh2he?svg=true)](https://ci.appveyor.com/project/anastasia-shmeleva/ahj-hw7-helpdesk-frontend)
