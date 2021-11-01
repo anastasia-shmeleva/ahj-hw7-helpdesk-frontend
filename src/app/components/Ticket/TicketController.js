@@ -1,8 +1,11 @@
-/* eslint-disable class-methods-use-this */
 export default class TicketController {
+  constructor(baseUrl) {
+    this.baseURL = baseUrl;
+  }
+
   getTickets() {
     this.tickets = (async () => {
-      const result = await fetch('http://localhost:7070/?method=allTickets');
+      const result = await fetch(`${this.baseURL}?method=allTickets`);
 
       const response = await result.json();
 
@@ -11,7 +14,7 @@ export default class TicketController {
   }
 
   deleteTicket(id) {
-    return fetch(`http://localhost:7070/?method=deleteTicket&id=${id}`, {
+    return fetch(`${this.baseURL}?method=deleteTicket&id=${id}`, {
       method: 'DELETE',
       body: id,
     });
@@ -19,7 +22,7 @@ export default class TicketController {
 
   ticketById(id) {
     this.target = (async () => {
-      const result = await fetch(`http://localhost:7070/?method=ticketById&id=${id}`);
+      const result = await fetch(`${this.baseURL}?method=ticketById&id=${id}`);
 
       const response = await result.json();
 
@@ -33,7 +36,7 @@ export default class TicketController {
     formData.append('name', name);
     formData.append('description', description);
 
-    fetch('http://localhost:7070/?method=updateTicket', {
+    fetch(`${this.baseURL}?method=updateTicket`, {
       method: 'PUT',
       body: new URLSearchParams(formData),
     });
@@ -45,7 +48,7 @@ export default class TicketController {
     formData.append('description', description);
     formData.append('created', created);
 
-    fetch('http://localhost:7070/?method=createTicket', {
+    fetch(`${this.baseURL}?method=createTicket`, {
       method: 'POST',
       body: new URLSearchParams(formData),
     });
@@ -56,7 +59,7 @@ export default class TicketController {
     formData.append('id', id);
     formData.append('status', status);
 
-    fetch('http://localhost:7070/?method=changeStatus', {
+    fetch(`${this.baseURL}?method=changeStatus`, {
       method: 'PATCH',
       body: new URLSearchParams(formData),
     });
